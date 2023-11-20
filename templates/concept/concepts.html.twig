@@ -1,0 +1,66 @@
+{% extends "baseIndex.html.twig" %}
+{% block body %}
+{% if app.user %}
+
+    <div style="display: flex;">
+        <h1>Welcome {{ app.user.username }}</h1><a class="nav-link d-flex btn btn-primary my-2 my-sm-1" style="color: white;margin-left:1rem " href="{{path('new_concept')}}">Create a new concept</a>
+    </div>
+    <br>
+    <div style="border:1px black solid;border-radius: 8px;" >
+        <section style="margin: 1rem;min-height: 400px;border-bottom: 1px black solid;" >
+            <center><h2 style="font-weight: bold;">Yours maps</h2></center>
+            <pre>
+                <table class="table table-hover" >
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">CreatedAt</th>
+                        <th scope="col"></th>
+                    </tr>
+                {% for row in Map %}
+                {% if row.owner == app.user %}
+                <tr>
+                    <td scope="col"><a href="/concepts/{{row.id}}">{{ row.title }}</a></td>
+                    <td scope="col">{{ row.lastmodified|date('d-m-Y') }}</td>
+                    <td><a class="btn btn-outline-secondary" href="/share/{{row.id}}">Share</a></td>
+                </tr>
+                
+                
+                {% endif %}
+                
+                {% endfor %}
+            </table>
+            </pre>
+        </section>
+        <section style="margin: 1rem;min-height: 400px;" >
+            <center><h2 style="font-weight: bold;">Shared maps</h2></center>
+            <table class="table table-hover" >
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">sender</th>
+                    <th scope="col">read Only</th>
+                    <th scope="col"></th>
+                    <th></th>
+                </tr>
+                {% for row in SharedMap %}
+                {% if row.recieverEmail == app.user.email %}
+                <tr>
+                    <td scope="col"><a href="/concepts/shared/{{row.id}}">{{ row.Map.title }}</a></td>
+                    <td scope="col">{{ row.sender}}</td>
+                    {% if row.ReadOnly == true %}
+                    <td>&times;</td>
+                        
+                    {% endif %}
+                </tr>
+                
+                
+                {% endif %}
+                
+                {% endfor %}
+        </section>
+    
+    </div>
+{% else %}
+<center><h3>You are not connected</h3></center>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,28 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <img src="{{asset('assets/img/logosanstext.png')}}" alt="conceptMaps" style="height: 4.5rem;margin: 0 1rem;" >
+    <a class="navbar-brand" href="{{path('index')}}"><b><H1>ConceptMaps</H1></b></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav me-auto">
+        
+          
+      </ul>
+      {% if app.user %}
+          
+          <a class="nav-link d-flex btn btn-secondary my-2 my-sm-0" style="color: white;margin-left:1rem " href="{{path('app_logout')}}">Log out</a>
+          <a class="nav-link d-flex btn btn-secondary my-2 my-sm-0" style="color: white;margin-left:1rem " href="{{path('concepts')}}">My account</a>
+      {% else %}
+          <a class="nav-link d-flex btn btn-secondary my-2 my-sm-0" style="color: white;margin-left:1rem " href="{{path('app_login')}}">Login</a>
+          <a class="nav-link d-flex btn btn-secondary my-2 my-sm-0" style="color: white;margin-left:1rem " href="{{path('app_register')}}">Register</a>
+      {% endif %}
+        {# <input class="form-control me-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button> #}
+    
+    </div>
+  </div>
+</nav>
+<br>

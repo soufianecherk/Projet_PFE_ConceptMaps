@@ -1,0 +1,15 @@
+{% extends "baseIndex.html.twig" %}
+
+{% block body %}
+<h1>Share Map '{{Map.title}}'</h1>
+ {{ form_start(form) }}
+        {{ form_row(form.sender, {value : app.user.email}) }}
+        {{ form_row(form.mapLabel,{value:Map.id}) }}
+        {{ form_row(form.recieverEmail) }}
+        <br>
+        {{ form_row(form.ReadOnly) }}
+       <br>
+          <button class="btn btn-secondary" type="submit" id="SubmitButton">Share Map</button>
+
+ {{ form_end(form) }}
+{% endblock %}
